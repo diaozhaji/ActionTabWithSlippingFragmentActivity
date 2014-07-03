@@ -11,5 +11,11 @@
     <string name="frag_1">Fragment 1</string>
     <string name="frag_2">Fragment 2</string>
     <string name="frag_3">Fragment 3</string>
+    
+    <string-array name="tab_name">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
 </resources>
