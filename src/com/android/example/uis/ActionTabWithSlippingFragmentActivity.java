@@ -3,33 +3,30 @@ package com.android.example.uis;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
         implements ActionBar.TabListener {
 
-    private Fragment1 mFragment1 = new Fragment1();
-
-    private Fragment2 mFragment2 = new Fragment2();
-
-    private Fragment3 mFragment3 = new Fragment3();
-
-    private static final int TAB_INDEX_COUNT = 3;
-
-    private static final int TAB_INDEX_ONE = 0;
-
-    private static final int TAB_INDEX_TWO = 1;
-
-    private static final int TAB_INDEX_THREE = 2;
-
     private ViewPager mViewPager;
 
     private ViewPagerAdapter mViewPagerAdapter;
+
+    // replace tab
+    private TextView [] button_tab_array;
+
+    // tab image
+    private Drawable bg_tab_selected;
+    private Drawable bg_tab_normal;
 
     /** Called when the activity is first created. */
     @Override
@@ -40,7 +37,45 @@ public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
         setUpActionBar();
         setUpViewPager();
         setUpTabs();
+
+        setUpMyBar();
+
     }
+
+    
+
+    private void setUpTabs() {
+        final ActionBar actionBar = getActionBar();
+        for (int i = 0; i < mViewPagerAdapter.getCount(); ++i) {
+            actionBar.addTab(actionBar.newTab()
+                    .setText(mViewPagerAdapter.getPageTitle(i))
+                    .setTabListener(this));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        // TODO Auto-generated method stub
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+        // TODO Auto-generated method stub
+
+    }
+    
 
     private void setUpActionBar() {
         final ActionBar actionBar = getActionBar();
@@ -61,6 +96,7 @@ public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
                     public void onPageSelected(int position) {
                         final ActionBar actionBar = getActionBar();
                         actionBar.setSelectedNavigationItem(position);
+                        
                     }
 
                     @Override
@@ -83,81 +119,85 @@ public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
                 });
     }
 
-    private void setUpTabs() {
-        final ActionBar actionBar = getActionBar();
-        for (int i = 0; i < mViewPagerAdapter.getCount(); ++i) {
-            actionBar.addTab(actionBar.newTab()
-                    .setText(mViewPagerAdapter.getPageTitle(i))
-                    .setTabListener(this));
-        }
+    
+    /**
+     * 安装自定义的Bar,暂时用view的方法实现
+     */
+    private void setUpMyBar() {
+        // TODO Auto-generated method stub
+        button_tab_array = new TextView[3];
+        
+        button_tab_array[0] = (TextView) findViewById(R.id.button_tab1);
+        button_tab_array[1] = (TextView) findViewById(R.id.button_tab2);
+        button_tab_array[2] = (TextView) findViewById(R.id.button_tab3);
+        initTabButton();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+    private void initTabButton() {
+        bg_tab_selected = getResources()
+                .getDrawable(R.drawable.bg_tab_selected);
+        bg_tab_normal = getResources().getDrawable(R.drawable.bg_tab_normal);
+        seeTab1();
 
-    public class ViewPagerAdapter extends FragmentPagerAdapter {
+        // TODO Auto-generated method stub
+        button_tab_array[0].setOnClickListener(new OnClickListener() {
 
-        public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-            // TODO Auto-generated constructor stub
-        }
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                seeTab1();
+                System.out.println("点击了1");
 
-        @Override
-        public Fragment getItem(int position) {
-            // TODO Auto-generated method stub
-            switch (position) {
-                case TAB_INDEX_ONE:
-                    return mFragment1;
-                case TAB_INDEX_TWO:
-                    return mFragment2;
-                case TAB_INDEX_THREE:
-                    return mFragment3;
             }
-            throw new IllegalStateException("No fragment at position "
-                    + position);
-        }
 
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return TAB_INDEX_COUNT;
-        }
+        });
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            String tabLabel = null;
-            switch (position) {
-                case TAB_INDEX_ONE:
-                    tabLabel = getString(R.string.tab_1);
-                    break;
-                case TAB_INDEX_TWO:
-                    tabLabel = getString(R.string.tab_2);
-                    break;
-                case TAB_INDEX_THREE:
-                    tabLabel = getString(R.string.tab_3);
-                    break;
+        button_tab_array[1].setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                seeTab2();
             }
-            return tabLabel;
-        }
+
+        });
+
+        button_tab_array[2].setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                seeTab3();
+            }
+
+        });
     }
 
-    @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    private void seeTab1() {
         // TODO Auto-generated method stub
+        button_tab_array[0].setBackgroundResource(R.drawable.bg_tab_selected);
+        button_tab_array[1].setBackgroundResource(R.drawable.bg_tab_normal);
+        button_tab_array[2].setBackgroundResource(R.drawable.bg_tab_normal);
+        mViewPager.setCurrentItem(0);
 
     }
 
-    @Override
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+    private void seeTab2() {
         // TODO Auto-generated method stub
-        mViewPager.setCurrentItem(tab.getPosition());
+        button_tab_array[0].setBackgroundResource(R.drawable.bg_tab_normal);
+        button_tab_array[1].setBackgroundResource(R.drawable.bg_tab_selected);
+        button_tab_array[2].setBackgroundResource(R.drawable.bg_tab_normal);
+        mViewPager.setCurrentItem(1);
+
     }
 
-    @Override
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    private void seeTab3() {
         // TODO Auto-generated method stub
+        button_tab_array[0].setBackgroundResource(R.drawable.bg_tab_normal);
+        button_tab_array[1].setBackgroundResource(R.drawable.bg_tab_normal);
+        button_tab_array[2].setBackgroundResource(R.drawable.bg_tab_selected);
+        mViewPager.setCurrentItem(2);
 
     }
+
 }

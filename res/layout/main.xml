@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_tab_normal"
             android:gravity="center"
-            android:text="详    情" />
+            android:text="R" />
 
         <ImageView
             android:layout_width="1dp"
@@ -34,7 +34,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_tab_normal"
             android:gravity="center"
-            android:text="短    评" />
+            android:text="G" />
 
         <ImageView
             android:layout_width="1dp"
@@ -48,7 +48,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_tab_normal"
             android:gravity="center"
-            android:text="相关电影" />
+            android:text="B" />
     </LinearLayout>
     
     <android.support.v4.view.ViewPager
