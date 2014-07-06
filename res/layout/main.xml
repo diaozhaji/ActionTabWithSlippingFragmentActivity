@@ -12,50 +12,6 @@
 
     
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:textColor="@color/black"
-        android:textSize="16sp" >
-
-        <TextView
-            android:id="@+id/button_tab1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_tab_normal"
-            android:gravity="center"
-            android:text="R" />
-
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_tab_del" />
-
-        <TextView
-            android:id="@+id/button_tab2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_tab_normal"
-            android:gravity="center"
-            android:text="G" />
-
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_tab_del" />
-
-        <TextView
-            android:id="@+id/button_tab3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/bg_tab_normal"
-            android:gravity="center"
-            android:text="B" />
-    </LinearLayout>
     
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

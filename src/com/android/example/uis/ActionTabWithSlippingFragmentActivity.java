@@ -1,5 +1,7 @@
 package com.android.example.uis;
 
+import com.example.customview.MyActionBar;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
@@ -27,6 +29,8 @@ public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
     // tab image
     private Drawable bg_tab_selected;
     private Drawable bg_tab_normal;
+    
+    private MyActionBar myAb;
 
     /** Called when the activity is first created. */
     @Override
@@ -37,12 +41,24 @@ public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
         setUpActionBar();
         setUpViewPager();
         setUpTabs();
-
-        setUpMyBar();
+        
+        getTab();
+        //setUpMyBar();
 
     }
 
     
+
+    /**
+     * get the tab
+     */
+    private void getTab() {
+        // TODO Auto-generated method stub
+        myAb = (MyActionBar) findViewById(R.id.title_view);
+        
+    }
+
+
 
     private void setUpTabs() {
         final ActionBar actionBar = getActionBar();
@@ -96,7 +112,7 @@ public class ActionTabWithSlippingFragmentActivity extends FragmentActivity
                     public void onPageSelected(int position) {
                         final ActionBar actionBar = getActionBar();
                         actionBar.setSelectedNavigationItem(position);
-                        
+                        myAb.setCurrentTab(position);
                     }
 
                     @Override
